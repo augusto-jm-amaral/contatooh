@@ -1,0 +1,33 @@
+<p><h2 class="text-warning text-center" ng-show="mensagem.texto">{{mensagem.texto}}</h3></p>
+<div class="jumbotron">
+  <h1 class="text-center">Bem vindo ao Contatooh</h1>
+</div>
+<a ng-href="#/contato" class="btn btn-primary">Novo</a>
+<input ng-model="filtro" type="search" placeholder="Procurar...">
+<p ng-show="contatos.length">Contatos cadastrados: {{contatos.length}}</p>
+<p><h3 class="text-center text-info" ng-hide="contatos.length">Não a contatos cadastrados</h3></p>
+<div class="table-responsive">
+  <table class="table table-hover">
+    <tr>
+      <th>Nome</th>
+      <th>E-mail</th>
+      <th>Emergência</th>
+      <th class="text-center">Ação</th>
+    </tr>
+    <tr ng-repeat='contato in contatos | filter: filtro'>
+      <td>
+        <a ng-href="#/contato/{{contato._id}}">{{contato.nome}}
+      </td>
+      <td>
+        {{contato.email}}
+      </td>
+      <td>
+        {{contato.emergencia.nome}}
+      </td>
+      <td class="text-center">
+        <button class="btn btn-warning" ng-click="remove(contato)">Remover</button>
+      </td>
+
+    </tr>
+  </table>
+</div>

@@ -1,6 +1,7 @@
 describe('Página principal', function () {
   beforeEach(function () {
     browser.get('http://localhost:3000/#/contatos');
+    browser.waitForAngular();
   });
 
   it('Deve estar logado', function () {
@@ -18,6 +19,7 @@ describe('Página principal', function () {
     element(by.repeater('contato in contatos').row(0))
       .element(by.css('.btn'))
       .click();
+    browser.waitForAngular();
 
     var totalDepois = element
       .all(by.repeater('contato in contatos'))

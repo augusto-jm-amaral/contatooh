@@ -2,6 +2,11 @@ var contatoPage = function () {
 
   this.visitar = function () {
     browser.get('http://localhost:3000/#/contato');
+    browser.driver.wait(function () {
+      return browser.driver.getCurrentUrl().then(function (url) {
+        return /contato/.test(url);
+      });
+    }, 10000);
   };
 
   this.digitarNome = function (nome) {

@@ -1,6 +1,7 @@
 var passport = require('passport')
 , GitHubStrategy = require('passport-github').Strategy
 , mongoose = require('mongoose');
+, config = require('./config');
 ;
 
 module.exports = function  () {
@@ -8,8 +9,8 @@ module.exports = function  () {
     var Usuario = mongoose.model('Usuario');
 
     passport.use(new GitHubStrategy({
-      clientID:'6c763fccb2dbf16e6e63',
-      clientSecret:'015b45831d2855276539d35114615a387d2b8784',
+      clientID: config.clientID,
+      clientSecret: config.clientSecret,
       callbackUrl:'http://localhost:3000'
 
     }, function  (acessToken, refreshToken, profile, done) {

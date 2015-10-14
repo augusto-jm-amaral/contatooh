@@ -28,5 +28,5 @@ describe("ContatoController", function () {
       $httpBackend.flush();
       expect($scope.contato._id).toBeDefined();
     }));
-    
+
 });

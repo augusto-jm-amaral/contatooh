@@ -1,4 +1,5 @@
-var URL = 'http://localhost:3000';
+var URL = 'http://localhost:3000'
+, config = require('./config.js')();
 
 exports.config = {
   seleniumAddress: ' http://127.0.0.1:4444/wd/hub',
@@ -7,8 +8,8 @@ exports.config = {
   onPrepare: function () {
     browser.driver.get('http://localhost:3000');
     browser.driver.findElement(by.id('entrar')).click();
-    browser.driver.findElement(by.id('login_field')).sendKeys('');
-    browser.driver.findElement(by.id('password')).sendKeys('');
+    browser.driver.findElement(by.id('login_field')).sendKeys(config.seleniumUser);
+    browser.driver.findElement(by.id('password')).sendKeys(config.seleniumUserPassword);
     browser.driver.findElement(by.name('commit')).click();
 
     return browser.driver.wait(function () {

@@ -2,7 +2,6 @@ var contatoPage = function () {
 
   this.visitar = function () {
     browser.get('http://localhost:3000/#/contato');
-    browser.waitForAngular();
   };
 
   this.digitarNome = function (nome) {

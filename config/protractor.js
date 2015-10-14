@@ -1,5 +1,4 @@
-var URL = 'http://localhost:3000'
-, config = require('./config.js')();
+config = require('./config.js')();
 
 exports.config = {
   sauceUser : config.sauceUser,
@@ -10,9 +9,7 @@ exports.config = {
     'tunnel-identifier': config.travisJobNumber,
     'build': config.travisBuild
   },
-  seleniumAddress: ' http://127.0.0.1:4444/wd/hub',
   specs: ['../test/e2e/**/*.js'],
-  baseUrl: URL,
   onPrepare: function () {
     browser.driver.get('http://localhost:3000');
     browser.driver.findElement(by.id('entrar')).click();

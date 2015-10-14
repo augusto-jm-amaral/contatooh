@@ -11,12 +11,13 @@ exports.config = {
   },
   specs: ['../test/e2e/**/*.js'],
   onPrepare: function () {
+    browser.manage().timeouts().pageLoadTimeout(100000);
     browser.driver.get('http://localhost:3000');
-    browser.driver.wait(function () {
-      return browser.driver.getCurrentUrl().then(function (url) {
-        return /auth/.test(url);
-      });
-    }, 10000);
+    // browser.driver.wait(function () {
+    //   return browser.driver.getCurrentUrl().then(function (url) {
+    //     return /auth/.test(url);
+    //   });
+    // }, 10000);
     browser.driver.findElement(by.id('entrar')).click();
     browser.driver.findElement(by.id('login_field')).sendKeys(config.seleniumUser);
     browser.driver.findElement(by.id('password')).sendKeys(config.seleniumUserPassword);

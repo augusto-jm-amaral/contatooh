@@ -2,6 +2,14 @@ var URL = 'http://localhost:3000'
 , config = require('./config.js')();
 
 exports.config = {
+  sauceUser : config.sauceUser,
+  sauceKey : config.sauceKey,
+  capabilities : {
+    'name': config.sauceTestName,
+    'browserName': 'chrome',
+    'tunnel-identifier': config.travisJobNumber,
+    'build': config.travisBuild
+  },
   seleniumAddress: ' http://127.0.0.1:4444/wd/hub',
   specs: ['../test/e2e/**/*.js'],
   baseUrl: URL,

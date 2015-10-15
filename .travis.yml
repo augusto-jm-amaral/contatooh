@@ -1,28 +1,42 @@
 language: node_js
 notification:
-  - augusto.jm.amaral1@gmail.com
+- augusto.jm.amaral1@gmail.com
 node_js:
-  - 0.10
+- 0.1
 services:
-  - mongodb
+- mongodb
 env:
   global:
-    - NODE_ENV: test
+  - NODE_ENV: test
 addons:
   sauce_connect: true
 before_install:
-  - npm install -g bower
-  - npm install -g grunt-cli
-  - npm install -g karma-cli
-  - npm install -g protractor
-  - webdriver-manager update
-  - bower install
+- npm install -g bower
+- npm install -g grunt-cli
+- npm install -g karma-cli
+- npm install -g protractor
+- webdriver-manager update
+- bower install
 before_script:
-  - npm install mongodb
-  - node test/data.js
-  - grunt
-  - cd dist
+- npm install mongodb
+- node test/data.js
+- grunt minifica
 script:
-  - karma start config/karma.config.js --single-run --browsers PhantomJS
-  - node server &
-  - protractor config/protractor.js --baseUrl http://localhost:3000
+- karma start config/karma.config.js --single-run --browsers PhantomJS
+- node server &
+- protractor config/protractor.js --baseUrl http://localhost:3000
+before_deploy:
+  - git config --global user.email 'travis@travis-ci.com'
+  - git config --global user.name 'Travis CI'
+  - git checkout $TRAVIS_BRANCH
+  - git add --all
+  - git commit -am "Travis commit"
+deploy:
+  provider: openshift
+  user: augusto.jm.amaral1@gmail.com
+  password:
+    secure: chfmkJLvY3E4YBJt03Rtc5JLAbQbLlIOGmOzjlqIhL8UbWGOJ4UnTM9G+NglgMwhg/coP6FjYw6744XGOE9BujThXj6QGwEQ3WQ8IuS5sSPw6jymeANIQJTRqUnuOAQe8M/GD1PmHcwphPgBZZPlvFqeWCYeFIswcLb6WVSx1C26shrsQR8u69vg9EVybswBKToJn63yiHvWPTLFVTr8q85mFaZrCDFYsLG0syMvxv+z9jOHliiXwmkoHJVIfxuO7859vgAalm6whPfA6xZDYxbaP1DRZY7moRkeNgiWdc+0EgLxYqQ+5vZ1tV2yH+hY6qmjrsjFwf0SaUdwNe4HWL3BhHxqDipVx3+R3+vhUVbaOvegbOuw9tKJ8cGlpRbmmlYxqhPI6bUjVZ1DhdfIKMdPhpsKHs6c1vT2srzdKfCCtI2T7yJ+Ud2HOwNHpb6VHQIsrtT2srZH0nVTGcyCvEEmBTe/IkqRelp2tlTPL/+YQ/fbRIWFvoY/Z/xmwhmGK7MXo+65hwO2JjSpG/Oeks3cv08+EjGSdQeeo3Ia+a8hdhZBJCfED1715G9MAR3gAtMfaYIKFjlsvYlt6tjAxKtYV5vo1JpE0iT3ZskUncoPwmVPwg2WuKof3tX6dXRXEAGhOrY1B3r21r8jPOJhdzVLjGtu2/pbZ7L9TaIILFc=
+  app: contatooh
+  domain: http://contatooh-augustojmamaral1.rhcloud.com/
+  on:
+    repo: augusto-jm-amaral/contatooh

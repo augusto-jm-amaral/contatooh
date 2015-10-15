@@ -4,6 +4,8 @@ var passport = require('passport')
 , config = require('./config')()
 ;
 
+var gitHubCallBack = 'http://' + config.domain + ':' + config.port + '/auth/github/callback';
+
 module.exports = function  () {
 
     var Usuario = mongoose.model('Usuario');
@@ -11,7 +13,7 @@ module.exports = function  () {
     passport.use(new GitHubStrategy({
       clientID: config.clientID,
       clientSecret: config.clientSecret,
-      callbackUrl:'http://localhost:3000'
+      callbackUrl: gitHubCallBack
 
     }, function  (acessToken, refreshToken, profile, done) {
 
